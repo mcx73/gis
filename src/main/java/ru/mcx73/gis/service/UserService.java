@@ -75,7 +75,7 @@ public class UserService implements UserDetailsService {
         List<Role> list = roleService.AllRole();
         Role role;
 
-        if(list == null || list.size() == 0){
+        if(list.isEmpty()){
             roleService.saveUserEndRoles();
             role = new Role(1L, "ROLE_USER");
         }else{

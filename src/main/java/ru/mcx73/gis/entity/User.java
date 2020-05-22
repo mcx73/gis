@@ -12,7 +12,7 @@ import java.util.Set;
 Entity говорит о том, что поля класса имеют отображение в БД, Table(name = «t_user») указывает с какой именно таблицей.
  */
 @Entity
-@Table(name = "t_user")
+@Table(name = "u_users")
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -7,10 +7,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import ru.mcx73.gis.entity.Role;
 import ru.mcx73.gis.entity.User;
+import ru.mcx73.gis.service.RoleServiceImpl;
 import ru.mcx73.gis.service.UserService;
 
 import javax.validation.Valid;
+import java.util.List;
 /*
 контроллер для страницы регистрации
  */

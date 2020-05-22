@@ -30,8 +30,10 @@ public class UserService implements UserDetailsService {
     private EntityManager em;
     @Autowired
     UserRepository userRepository;
+
     @Autowired
-    RoleRepository roleRepository;
+    private RoleServiceImpl roleService;
+
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -70,7 +72,18 @@ public class UserService implements UserDetailsService {
             return false;
         }
 
-        user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
+        List<Role> list = roleService.AllRole();
+        Role role;
+
+        if(list == null || list.size() == 0){
+            roleService.saveUserEndRoles();
+            role = new Role(1L, "ROLE_USER");
+        }else{
+            role = new Role(3L, "ROLE_USER");
+        }
+
+
+        user.setRoles(Collections.singleton(role));
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return true;

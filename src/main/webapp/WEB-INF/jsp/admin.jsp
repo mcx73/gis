@@ -14,9 +14,9 @@
     <table>
         <thead>
         <th>ID</th>
-        <th>UserName</th>
-        <th>Password</th>
-        <th>Roles</th>
+        <th>Имя пользователя</th>
+        <th>Пароль</th>
+        <th>Права</th>
         </thead>
         <c:forEach items="${allUsers}" var="user">
             <tr>
@@ -30,7 +30,9 @@
                     <form action="${pageContext.request.contextPath}/admin" method="post">
                         <input type="hidden" name="userId" value="${user.id}"/>
                         <input type="hidden" name="action" value="delete"/>
+                        <c:if test="${user.id!=1}">
                         <button type="submit">Удалить</button>
+                        </c:if>
                     </form>
                 </td>
             </tr>

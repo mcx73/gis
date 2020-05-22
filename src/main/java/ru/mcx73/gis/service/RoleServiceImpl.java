@@ -1,17 +1,12 @@
 package ru.mcx73.gis.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.mcx73.gis.entity.Role;
-import ru.mcx73.gis.entity.User;
 import ru.mcx73.gis.repository.RoleRepository;
-import ru.mcx73.gis.repository.UserRepository;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
 
 @Service
 public class RoleServiceImpl {
@@ -19,11 +14,6 @@ public class RoleServiceImpl {
 
     @Autowired
     RoleRepository roleRepository;
-    @Autowired
-    UserRepository userRepository;
-
-    @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public List<Role> AllRole() {
         list = roleRepository.findAll();

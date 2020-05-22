@@ -3,6 +3,7 @@ package ru.mcx73.gis.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -38,8 +39,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //Доступ только для не зарегистрированных пользователей
                 .antMatchers("/registration").not().fullyAuthenticated()
                 //Доступ только для пользователей с ролью Администратор
-                .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/docs").hasRole("USER")
+                .antMatchers("/admin/**").hasAuthority("ADMIN")
+                .antMatchers("/docs").hasAuthority("USER")
                 //Доступ разрешен всем пользователей
                 .antMatchers("/", "/resources/**").permitAll()
                 //Все остальные страницы требуют аутентификации

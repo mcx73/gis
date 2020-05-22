@@ -19,11 +19,7 @@ public class RoleServiceImpl {
 
     @Autowired
     RoleRepository roleRepository;
-    @Autowired
-    UserRepository userRepository;
 
-    @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public List<Role> AllRole() {
         list = roleRepository.findAll();

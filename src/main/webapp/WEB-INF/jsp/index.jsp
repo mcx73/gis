@@ -21,7 +21,7 @@
     <sec:authorize access="isAuthenticated()">
         <h4><a href="/logout">Выйти</a></h4>
     </sec:authorize>
-     <sec:authorize access="hasAuthority('USER')">
+     <sec:authorize access="hasAnyAuthority('USER','ADMIN')">
         <h4><a href="/docs">Документы (только пользователь)</a></h4>
     </sec:authorize>
    <sec:authorize access="hasAuthority('ADMIN')">

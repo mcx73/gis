@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import ru.mcx73.gis.entity.Role;
 import ru.mcx73.gis.entity.User;
 import ru.mcx73.gis.repository.RoleRepository;
@@ -72,6 +73,11 @@ public class UserService implements UserDetailsService {
             return false;
         }
 
+        /*
+        ниже смотрим при регистрации, если справочник роли пуст, то это 1 запуск. тогда создаем роли
+        и первому юзеру назначаем права по умолчанию - админ, остальные юзеры будут по умолчанию
+        иметь права - юзер
+         */
         List<Role> list = roleService.AllRole();
         Role role;
 
@@ -100,5 +106,34 @@ public class UserService implements UserDetailsService {
     public List<User> usergtList(Long idMin) {
         return em.createQuery("SELECT u FROM User u WHERE u.id > :paramId", User.class)
                 .setParameter("paramId", idMin).getResultList();
+    }
+
+    public void updateProfile(User user, String username, String email, String password) {
+        String userEmail = user.getEmail();
+        String userName = user.getUsername();
+        String userPassword = user.getPassword();
+
+        /*
+        проверим перед записью изменились ли реквизиты по отношению к текущему пользователю
+         */
+        boolean isNameChanged = (!username.equals(userName));
+        boolean isPasswordChanged = (!username.equals(userPassword));
+        boolean isEmailChanged = (email != null && !email.equals(userEmail)) ||
+                (userEmail != null && !userEmail.equals(email));
+
+        if (isPasswordChanged) {
+            user.setPassword(password);
+        }
+        if (isNameChanged) {
+            user.setUsername(username);
+        }
+        if (isEmailChanged) {
+            user.setEmail(email);
+        }
+
+        if(isNameChanged || isPasswordChanged || isEmailChanged) {
+            userRepository.save(user);
+        }
+
     }
 }

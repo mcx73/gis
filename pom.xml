@@ -81,6 +81,12 @@
 			<artifactId>spring-security-crypto</artifactId>
 			<version>5.3.2.RELEASE</version>
 		</dependency>
+		<!-- для того чтобы сохранять сесии пользователя в базе данных -->
+		<dependency>
+			<groupId>org.springframework.session</groupId>
+			<artifactId>spring-session-jdbc</artifactId>
+			<version>2.3.0.RELEASE</version>
+		</dependency>
 
 
 

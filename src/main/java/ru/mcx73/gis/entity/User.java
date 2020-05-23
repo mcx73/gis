@@ -9,10 +9,10 @@ import java.util.Collection;
 import java.util.Set;
 
 /*
-Entity говорит о том, что поля класса имеют отображение в БД, Table(name = «t_user») указывает с какой именно таблицей.
+Entity говорит о том, что поля класса имеют отображение в БД, Table(name = «u_user») указывает с какой именно таблицей.
  */
 @Entity
-@Table(name = "t_user")
+@Table(name = "u_user")
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,6 +28,17 @@ public class User implements UserDetails {
     private String username;
     @Size(min=2, message = "Не меньше 5 знаков")
     private String password;
+    private String email;
+
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Transient
     private String passwordConfirm;
     /*

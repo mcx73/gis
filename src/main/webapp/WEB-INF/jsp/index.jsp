@@ -19,8 +19,20 @@
     <sec:authorize access="isAuthenticated()">
         <h4><a href="/logout">Выйти</a></h4>
     </sec:authorize>
-    <h4><a href="/docs">Документы (только пользователь)</a></h4>
-    <h4><a href="/admin">Пользователи (только админ)</a></h4>
+    <!--<sec:authorize access="!isAnonymous()">-->
+        <sec:authorize access="hasAnyAuthority('USER', 'ADMIN')">
+            <h4><a href="/docs">Документы (только пользователь)</a></h4>
+        </sec:authorize>
+        <sec:authorize access="hasAnyAuthority('MODERATOR', 'ADMIN')">
+            <h4><a href="/mfc">МФЦ (только модератор)</a></h4>
+        </sec:authorize>
+        <sec:authorize access="hasAuthority('ADMIN')">
+            <h4><a href="/admin">Пользователи (только админ)</a></h4>
+        </sec:authorize>
+        <sec:authorize access="isAuthenticated()">
+            <h4><a href="/profile">Профайл</a></h4>
+        </sec:authorize>
+    </sec:authorize>
 </div>
 </body>
 </html>

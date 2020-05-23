@@ -122,7 +122,7 @@ public class UserService implements UserDetailsService {
                 (userEmail != null && !userEmail.equals(email));
 
         if (isPasswordChanged) {
-            user.setPassword(password);
+            user.setPassword(bCryptPasswordEncoder.encode(password));
         }
         if (isNameChanged) {
             user.setUsername(username);

@@ -56,9 +56,8 @@ public class AdminController {
     /*
     AuthenticationPrincipal - получает пользователя с контекста, чтобы не искать его в БД
      */
-    @GetMapping("/profile/{userId}")
-    public String  getProfile(@PathVariable("userId") Long userId, Model model) {
-        User user = userService.findUserById(userId);
+    @GetMapping("/profile")
+    public String  getProfile(@AuthenticationPrincipal User user, Model model) {
         model.addAttribute("username", user.getUsername());
         model.addAttribute("email", user.getEmail());
         model.addAttribute("password", user.getPassword());
@@ -74,16 +73,15 @@ public class AdminController {
         return "profile";
     }
 
-    @PostMapping("/profile/{userId}")
-    public String  updateProfile(@PathVariable ("userId") Long id,
+    @PostMapping("/profile")
+    public String  updateProfile(@AuthenticationPrincipal User user,
                                  @RequestParam String username,
                                  @RequestParam String email,
-                                 @RequestParam String password,
-                                @RequestParam String roleslist) {
-        User user = userService.findUserById(id);
-            userService.updateProfile(user,username,email,password,roleslist);
+                                 @RequestParam String password) {
 
-        return "redirect:/admin";
+            userService.updateProfile(user,username,email,password);
+
+        return "redirect:/profile";
     }
 
 }

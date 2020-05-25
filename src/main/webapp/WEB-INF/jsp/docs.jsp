@@ -10,11 +10,23 @@
 <body>
 <div>
     <h2>Документы <br> Только для залогинившихся пользователей.</h2>
-    <form method="POST" enctype="multipart/form-data"
-          action="/upload">
-        File to upload: <input type="file" name="file"><br /> Name: <input
-            type="text" name="name"><br /> <br /> <input type="submit" value="Upload"> Press here to upload the file!
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <button type="submit">добавить</button>
     </form>
+            <c:forEach items="${docum}" var="doc">
+            <div>
+                <b>${doc.id}</b>
+                <strong>${doc.authorName}</strong>
+                <div>
+
+                <c:if test="${doc.filename!= null}">
+                  <!--  <img src="/img/{doc.icon}">
+                  -->
+                </c:if>
+            </div>
+        </c:forEach>
+</div>
     <a href="/">Главная</a>
 </div>
 </body>

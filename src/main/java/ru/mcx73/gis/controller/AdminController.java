@@ -1,18 +1,25 @@
 package ru.mcx73.gis.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import ru.mcx73.gis.entity.Docs;
 import ru.mcx73.gis.entity.Role;
 import ru.mcx73.gis.entity.User;
+import ru.mcx73.gis.repository.DocsRepository;
 import ru.mcx73.gis.repository.RoleRepository;
 import ru.mcx73.gis.service.RoleServiceImpl;
 import ru.mcx73.gis.service.UserService;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 public class AdminController {
@@ -21,6 +28,12 @@ public class AdminController {
 
     @Autowired
     RoleServiceImpl roleService;
+
+    @Autowired
+    DocsRepository docsRepository;
+
+    @Value("${upload.path}")
+    private String uploadPath;
 
     /*
     получает данные всех пользователей и добавляет их на страницу.
@@ -77,11 +90,53 @@ public class AdminController {
     public String  updateProfile(@AuthenticationPrincipal User user,
                                  @RequestParam String username,
                                  @RequestParam String email,
-                                 @RequestParam String password) {
-
+                                 @RequestParam String password)
+                                  {
             userService.updateProfile(user,username,email,password);
 
         return "redirect:/profile";
     }
 
+    @GetMapping("/docs")
+    public String main(Model model) {
+        Iterable<Docs> docs = docsRepository.findAll();
+
+        model.addAttribute("docum", docs);
+
+        return "docs";
+    }
+
+    @PostMapping("/docs")
+    public String addDocs(@AuthenticationPrincipal User user,
+                                 @RequestParam("file") MultipartFile file,
+                                 Model model) throws IOException {
+
+        Docs doc = new Docs(user);
+
+        String newUploadPath = "";
+
+        newUploadPath = uploadPath+"/"+user.getUsername().toString();
+
+        if (file != null && !file.getOriginalFilename().isEmpty()) {
+            File uploadDir = new File(newUploadPath);
+
+            if (!uploadDir.exists()) {
+                uploadDir.mkdir();
+            }
+
+            String uuidFile = UUID.randomUUID().toString();
+            String resultFilename = uuidFile + "." + file.getOriginalFilename();
+
+            file.transferTo(new File(newUploadPath + "/" + resultFilename));
+
+            doc.setFilename(resultFilename);
+        }
+        docsRepository.save(doc);
+
+        Iterable<Docs> docum = docsRepository.findAll();
+
+        model.addAttribute("docum", docum);
+
+        return "docs";
+    }
 }

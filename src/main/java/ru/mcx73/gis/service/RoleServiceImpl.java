@@ -8,6 +8,7 @@ import ru.mcx73.gis.entity.User;
 import ru.mcx73.gis.repository.RoleRepository;
 import ru.mcx73.gis.repository.UserRepository;
 
+import java.io.File;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -27,7 +28,6 @@ public class RoleServiceImpl {
     }
 
     public boolean saveUserEndRoles() {
-
         roleRepository.saveAndFlush(new Role(1L, "ADMIN"));
         roleRepository.saveAndFlush(new Role(2L, "MODERATOR"));
         roleRepository.saveAndFlush(new Role(3L, "USER"));

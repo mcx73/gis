@@ -13,6 +13,7 @@ import ru.mcx73.gis.repository.UserRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.io.File;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;

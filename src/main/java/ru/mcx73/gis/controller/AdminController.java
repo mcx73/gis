@@ -4,17 +4,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import ru.mcx73.gis.entity.Role;
 import ru.mcx73.gis.entity.User;
+import ru.mcx73.gis.repository.RoleRepository;
+import ru.mcx73.gis.service.RoleServiceImpl;
 import ru.mcx73.gis.service.UserService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class AdminController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    RoleServiceImpl roleService;
 
     /*
     получает данные всех пользователей и добавляет их на страницу.
@@ -56,6 +62,14 @@ public class AdminController {
         model.addAttribute("email", user.getEmail());
         model.addAttribute("password", user.getPassword());
         model.addAttribute("passwordConfirm", user.getPasswordConfirm());
+
+        List<Role> addressList = roleService.AllRole();
+        List<String> roleList = new ArrayList<>();
+        for (Role roles : addressList) {
+            roleList.add(roles.getName());
+        }
+        model.addAttribute("roleList", roleList);
+
         return "profile";
     }
 

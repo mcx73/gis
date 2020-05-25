@@ -1,4 +1,5 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 
 <!DOCTYPE html>
@@ -22,7 +23,16 @@
             <input name="passwordConfirm" type="password" placeholder="passwordConfirm"/>
             <input name="email" type="text" placeholder="Email"
                    autofocus="true"/>
+
+            <h3>Список ролей</h3>
+            <select name="roleslist">
+                <c:forEach items="${roleList}" var="listrole">
+                    <option value="${listrole}"><c:out value="${listrole}" /></option>
+                </c:forEach>
+            </select>
+
         </div>
+
         <button type="submit">Сохранить</button>
         <a href="/">Главная</a>
     </form>

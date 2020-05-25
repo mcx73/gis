@@ -14,7 +14,7 @@
     <% response.sendRedirect("/"); %>
 </sec:authorize>
 <div>
-    <form method="POST" action="/profile">
+    <form method="POST" action="/profile/${userId}">
         <h2>Профиль пользователя</h2>
         <div>
             <input name="username" type="text" placeholder="Username"
@@ -23,8 +23,6 @@
             <input name="passwordConfirm" type="password" placeholder="passwordConfirm"/>
             <input name="email" type="text" placeholder="Email"
                    autofocus="true"/>
-
-            <h3>Список ролей</h3>
             <select name="roleslist">
                 <c:forEach items="${roleList}" var="listrole">
                     <option value="${listrole}"><c:out value="${listrole}" /></option>

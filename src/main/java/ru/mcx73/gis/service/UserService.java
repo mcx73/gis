@@ -14,6 +14,7 @@ import ru.mcx73.gis.repository.UserRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -108,11 +109,22 @@ public class UserService implements UserDetailsService {
                 .setParameter("paramId", idMin).getResultList();
     }
 
-    public void updateProfile(User user, String username, String email, String password) {
+    public void updateProfile(User user, String username, String email, String password, String roleslist) {
         String userEmail = user.getEmail();
         String userName = user.getUsername();
         String userPassword = user.getPassword();
-
+//        if (roleslist.equals("ADMIN")) {
+//            Role role1 = new Role(1L,"USER_ROLE");
+//            user.setRoles(Collections.singleton(role1));
+//        }
+//        if (roleslist.equals("MODERATOR")) {
+//            Role role1 = new Role(2L,"USER_ROLE");
+//            user.setRoles(Collections.singleton(role1));
+//        }
+//        if (roleslist.equals("USER")) {
+//            Role role1 = new Role(3L,"USER_ROLE");
+//            user.setRoles(Collections.singleton(role1));
+//        }
         /*
         проверим перед записью изменились ли реквизиты по отношению к текущему пользователю
          */

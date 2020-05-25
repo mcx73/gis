@@ -30,8 +30,16 @@
                     <form action="${pageContext.request.contextPath}/admin" method="post">
                         <input type="hidden" name="userId" value="${user.id}"/>
                         <input type="hidden" name="action" value="delete"/>
-                        <button type="submit">Удалить</button>
+                        <c:if test="${user.id!=1}">
+                            <button type="submit">Удалить</button>
+                        </c:if>
                     </form>
+
+                </td>
+                <td>
+                    <a href="/profile/${user.id}" >
+                      Изменить
+                    </a>
                 </td>
             </tr>
         </c:forEach>

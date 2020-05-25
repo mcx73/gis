@@ -13,6 +13,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     При необходимости можно использовать аннотацию Query над методом и писать запросы
     @Query(value = "SELECT nextval(pg_get_serial_sequence('t_user', 'id'))", nativeQuery = true)
     Long getNextId();
+
      */
 
 }

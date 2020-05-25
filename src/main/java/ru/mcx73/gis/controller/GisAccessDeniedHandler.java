@@ -13,9 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+
 /**
  * обрабатывает 403 ошибку перенаправляя в случае ее вызова на /403 страницу
  * тут
+ *
  */
 
 @Component

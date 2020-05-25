@@ -69,6 +69,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .and()
         .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
 
+
     }
 
     @Autowired

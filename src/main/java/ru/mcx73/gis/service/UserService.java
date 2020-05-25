@@ -129,6 +129,7 @@ public class UserService implements UserDetailsService {
         }
         if (isEmailChanged) {
             user.setEmail(email);
+
         }
 
         if(isNameChanged || isPasswordChanged || isEmailChanged) {

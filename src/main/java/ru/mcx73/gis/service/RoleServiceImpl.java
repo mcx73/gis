@@ -26,6 +26,7 @@ public class RoleServiceImpl {
         roleRepository.saveAndFlush(new Role(2L, "MODERATOR"));
         roleRepository.saveAndFlush(new Role(3L, "USER"));
 
+
         return true;
     }
 

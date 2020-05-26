@@ -17,14 +17,21 @@
         <th>UserName</th>
         <th>Password</th>
         <th>Roles</th>
+        <th>Email</th>
+        <th></th>
+        <th></th>
         </thead>
         <c:forEach items="${allUsers}" var="user">
             <tr>
                 <td>${user.id}</td>
                 <td>${user.username}</td>
                 <td>${user.password}</td>
+                <td><c:forEach items="${user.roles}" var="role">${role.name}</c:forEach></td>
+                <td>${user.email}</td>
                 <td>
-                    <c:forEach items="${user.roles}" var="role">${role.name}; </c:forEach>
+                    <a href="/profile/${user.id}" >
+                        Изменить
+                    </a>
                 </td>
                 <td>
                     <form action="${pageContext.request.contextPath}/admin" method="post">
@@ -34,12 +41,6 @@
                             <button type="submit">Удалить</button>
                         </c:if>
                     </form>
-
-                </td>
-                <td>
-                    <a href="/profile/${user.id}" >
-                      Изменить
-                    </a>
                 </td>
             </tr>
         </c:forEach>

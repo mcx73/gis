@@ -109,22 +109,11 @@ public class UserService implements UserDetailsService {
                 .setParameter("paramId", idMin).getResultList();
     }
 
-    public void updateProfile(User user, String username, String email, String password, String roleslist) {
+    public boolean updateProfile(User user, String username, String email, String password, String roleslist) {
         String userEmail = user.getEmail();
         String userName = user.getUsername();
         String userPassword = user.getPassword();
-//        if (roleslist.equals("ADMIN")) {
-//            Role role1 = new Role(1L,"USER_ROLE");
-//            user.setRoles(Collections.singleton(role1));
-//        }
-//        if (roleslist.equals("MODERATOR")) {
-//            Role role1 = new Role(2L,"USER_ROLE");
-//            user.setRoles(Collections.singleton(role1));
-//        }
-//        if (roleslist.equals("USER")) {
-//            Role role1 = new Role(3L,"USER_ROLE");
-//            user.setRoles(Collections.singleton(role1));
-//        }
+
         /*
         проверим перед записью изменились ли реквизиты по отношению к текущему пользователю
          */
@@ -143,10 +132,23 @@ public class UserService implements UserDetailsService {
             user.setEmail(email);
 
         }
-
-        if(isNameChanged || isPasswordChanged || isEmailChanged) {
+        Role role;
+        if (roleslist.equals("ADMIN")) {
+            role = new Role(1L, "ROLE_USER");
+            user.setRoles(Collections.singleton(role));
             userRepository.save(user);
         }
+        if (roleslist.equals("MODERATOR")) {
+            role = new Role(2L, "ROLE_USER");
+            user.setRoles(Collections.singleton(role));
+            userRepository.save(user);
+        }
+        if (roleslist.equals("USER")) {
+            role = new Role(3L, "ROLE_USER");
+            user.setRoles(Collections.singleton(role));
+            userRepository.save(user);
+        }
+        return true;
 
     }
 }

@@ -7,7 +7,7 @@
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
           <factory-entry name="entityManagerFactory" value="bd48ee6a-13a9-4529-818e-e2911bd86b6f" />
-          <factory-entry name="gis" />
+          <factory-entry name="gis" value="bd48ee6a-13a9-4529-818e-e2911bd86b6f" />
         </datasource-mapping>
         <naming-strategy-map />
       </configuration>

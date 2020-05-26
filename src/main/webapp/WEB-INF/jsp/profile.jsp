@@ -18,14 +18,14 @@
         <h2>Профиль пользователя</h2>
         <div>
             <input name="username" type="text" placeholder="Username"
-                   autofocus="true"/>
-            <input name="password" type="password" placeholder="Password"/>
+                   autofocus="true" value="${username}"/>
+            <input name="password" type="password" placeholder="Password" value="${password}"/>
             <input name="passwordConfirm" type="password" placeholder="passwordConfirm"/>
             <input name="email" type="text" placeholder="Email"
-                   autofocus="true"/>
+                   autofocus="true" value="${email}"/>
             <select name="roleslist">
                 <c:forEach items="${roleList}" var="listrole">
-                    <option value="${listrole}"><c:out value="${listrole}" /></option>
+                    <option name = "selectrole" value="${listrole}"><c:out value="${listrole}" /></option>
                 </c:forEach>
             </select>
 

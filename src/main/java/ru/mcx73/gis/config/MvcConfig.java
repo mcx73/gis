@@ -28,8 +28,8 @@ public class MvcConfig implements WebMvcConfigurer {
     //служит для раздачи всех файлов
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/files/")
-                .addResourceLocations("file://" + uploadPath + "/");
+        registry.addResourceHandler("/resources/**")
+                .addResourceLocations("/resources/");
     }
 
 

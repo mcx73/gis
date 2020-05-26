@@ -108,7 +108,7 @@ public class AdminController {
 
     @PostMapping("/docs")
     public String addDocs(@AuthenticationPrincipal User user,
-                                 @RequestParam("file") MultipartFile file,
+                                 @RequestParam(value = "file") MultipartFile file,
                                  Model model) throws IOException {
 
         Docs doc = new Docs(user);
@@ -136,6 +136,8 @@ public class AdminController {
         Iterable<Docs> docum = docsRepository.findAll();
 
         model.addAttribute("docum", docum);
+        
+
 
         return "docs";
     }

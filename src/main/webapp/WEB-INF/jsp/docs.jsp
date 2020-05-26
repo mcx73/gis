@@ -14,17 +14,16 @@
         <input type="file" name="file">
         <button type="submit">добавить</button>
     </form>
-            <c:forEach items="${docum}" var="doc">
-            <div>
-                <b>${doc.id}</b>
-                <strong>${doc.authorName}</strong>
-                <div>
+    <c:forEach items="${docum}" var="doc">
+    <div>
+        <b>${doc.id}</b>
+        <strong>${doc.authorName}</strong>
 
-                <c:if test="${doc.filename!= null}">
-                  <!--  <img src="/img/{doc.icon}">
-                  -->
-                </c:if>
-            </div>
+        <c:if test="${doc.filename!= null}">
+            <img src=${doc.icon} width="20" height="20" />
+
+        </c:if>
+    </div>
         </c:forEach>
 </div>
     <a href="/">Главная</a>

@@ -109,7 +109,7 @@ public class UserService implements UserDetailsService {
                 .setParameter("paramId", idMin).getResultList();
     }
 
-    public boolean updateProfile(User user, String username, String email, String password, String roleslist) {
+    public void updateProfile(User user, String username, String email, String password, String roleslist) {
         String userEmail = user.getEmail();
         String userName = user.getUsername();
         String userPassword = user.getPassword();
@@ -148,7 +148,5 @@ public class UserService implements UserDetailsService {
             user.setRoles(Collections.singleton(role));
             userRepository.save(user);
         }
-        return true;
-
     }
 }

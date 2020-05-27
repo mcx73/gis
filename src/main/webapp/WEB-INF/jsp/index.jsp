@@ -20,8 +20,8 @@
         <h4><a href="/logout">Выйти</a></h4>
     </sec:authorize>
     <!--<sec:authorize access="!isAnonymous()">-->
-        <sec:authorize access="hasAnyAuthority('USER', 'ADMIN')">
-            <h4><a href="/docs">Документы (только пользователь)</a></h4>
+        <sec:authorize access="hasAnyAuthority('USER')">
+            <h4><a href="/docs">Подача документов</a></h4>
         </sec:authorize>
         <sec:authorize access="hasAnyAuthority('MODERATOR', 'ADMIN')">
             <h4><a href="/mfc">МФЦ (только модератор)</a></h4>

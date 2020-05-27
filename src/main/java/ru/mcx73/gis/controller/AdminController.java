@@ -100,48 +100,4 @@ public class AdminController {
 
         return "redirect:/admin";
     }
-
-
-    @GetMapping("/docs")
-    public String main(Model model) {
-        Iterable<Docs> docs = docsRepository.findAll();
-
-        model.addAttribute("docum", docs);
-
-        return "docs";
-    }
-
-    @PostMapping("/docs")
-    public String addDocs(@AuthenticationPrincipal User user,
-                          @RequestParam("file") MultipartFile file,
-                          Model model) throws IOException {
-
-        Docs doc = new Docs(user);
-
-        String newUploadPath = "";
-
-        newUploadPath = uploadPath+"/"+user.getUsername().toString();
-
-        if (file != null && !file.getOriginalFilename().isEmpty()) {
-            File uploadDir = new File(newUploadPath);
-
-            if (!uploadDir.exists()) {
-                uploadDir.mkdir();
-            }
-
-            String uuidFile = UUID.randomUUID().toString();
-            String resultFilename = uuidFile + "." + file.getOriginalFilename();
-
-            file.transferTo(new File(newUploadPath + "/" + resultFilename));
-
-            doc.setFilename(resultFilename);
-        }
-        docsRepository.save(doc);
-
-        Iterable<Docs> docum = docsRepository.findAll();
-
-        model.addAttribute("docum", docum);
-
-        return "docs";
-    }
 }

@@ -12,7 +12,7 @@ import java.util.Optional;
 @Service
 public class FileService implements DocsRepository {
     @Autowired
-    private static DocsRepository docsRepository;
+    private DocsRepository docsRepository;
 
     public boolean deleteFile(Long fileId) {
         if (docsRepository.findById(fileId).isPresent()) {

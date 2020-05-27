@@ -20,8 +20,10 @@ import javax.servlet.ServletContext;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Optional;
-import java.util.UUID;
 
 @Controller
 public class FileController {
@@ -84,7 +86,6 @@ public class FileController {
                           Model model) throws IOException {
 
         Docs doc = new Docs(user);
-
         String newUploadPath = "";
 
         newUploadPath = DIRECTORY+"/"+user.getUsername().toString();
@@ -95,9 +96,10 @@ public class FileController {
             if (!uploadDir.exists()) {
                 uploadDir.mkdir();
             }
+            Date date = new Date();
+            String resultFilename =  user.getUsername()+"_"+date+"_"+file.getOriginalFilename();
+            resultFilename = fileService.toTranslit(resultFilename);
 
-            String uuidFile = UUID.randomUUID().toString();
-            String resultFilename = uuidFile + "~" + fileService.toTranslit(file.getOriginalFilename());
             File transerFile = new File(newUploadPath + "/" + resultFilename);
             file.transferTo(transerFile);
             doc.setFilename(resultFilename);

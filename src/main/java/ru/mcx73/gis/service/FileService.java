@@ -12,7 +12,7 @@ import java.util.Optional;
 @Service
 public class FileService implements DocsRepository {
     @Autowired
-    private DocsRepository docsRepository;
+    private static DocsRepository docsRepository;
 
     public boolean deleteFile(Long fileId) {
         if (docsRepository.findById(fileId).isPresent()) {
@@ -146,8 +146,6 @@ public class FileService implements DocsRepository {
         letters.put("ю", "yu");
         letters.put("я", "ya");
     }
-
-
 
     public static String toTranslit(String Inputtext) {
         String ext = FilenameUtils.getExtension(Inputtext);

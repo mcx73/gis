@@ -11,6 +11,7 @@ import ru.mcx73.gis.repository.DocsRepository;
 import ru.mcx73.gis.service.RoleServiceImpl;
 import ru.mcx73.gis.service.UserService;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Controller
@@ -67,8 +68,17 @@ public class AdminController {
         user = userService.findUserById(id);
         model.addAttribute("username", user.getUsername());
         model.addAttribute("email", user.getEmail());
-        model.addAttribute("password", user.getPassword());
-        model.addAttribute("passwordConfirm", user.getPasswordConfirm());
+        model.addAttribute("password", "");
+        model.addAttribute("passwordConfirm", "");
+
+        Iterator<Role> iterator = user.getRoles().iterator();
+
+        String r = "";
+        while (iterator.hasNext()){
+            r = iterator.next().getName();
+            break;
+        }
+        model.addAttribute("roleUser", r);
 
         List<Role> addressList = roleService.AllRole();
         List<String> roleList = new ArrayList<>();
@@ -85,10 +95,11 @@ public class AdminController {
                                  @RequestParam String username,
                                  @RequestParam String email,
                                  @RequestParam String password,
+                                 @RequestParam String passwordConfirm,
                                  @RequestParam String roleslist) {
-            User user = new User();
-            user = userService.findUserById(id);
-            userService.updateProfile(user,username,email,password,roleslist);
+        //User user;// = new User();
+        User user = userService.findUserById(id);
+        userService.updateProfile(user,username,email,passwordConfirm,roleslist);
 
         return "redirect:/admin";
     }

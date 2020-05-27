@@ -100,10 +100,23 @@
 	</dependencies>
 
 	<build>
+		<finalName>mcx73app</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>2.3.0.RELEASE</version>
+				<configuration>
+					<!--suppress UnresolvedMavenProperty -->
+					<mainClass>${GisApplication}</mainClass>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

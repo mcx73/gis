@@ -14,10 +14,7 @@ import ru.mcx73.gis.repository.UserRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
  /*
   Содержит методы для бизнес-логики приложения
@@ -122,7 +119,7 @@ public class UserService implements UserDetailsService {
         boolean isEmailChanged = (email != null && !email.equals(userEmail)) ||
                 (userEmail != null && !userEmail.equals(email));
 
-        if (isPasswordChanged) {
+        if (isPasswordChanged && !password.equals("")) {
             user.setPassword(bCryptPasswordEncoder.encode(password));
         }
         if (isNameChanged) {
@@ -132,20 +129,27 @@ public class UserService implements UserDetailsService {
             user.setEmail(email);
 
         }
-        Role role;
+        Set<Role> roleSet = new HashSet<Role>();
+
         if (roleslist.equals("ADMIN")) {
-            role = new Role(1L, "ROLE_USER");
-            user.setRoles(Collections.singleton(role));
+            Role role = new Role(1L, "ROLE_USER");
+            //user.setRoles(Collections.singleton(role));
+            roleSet.add(role);
+            user.setRoles(roleSet);
             userRepository.save(user);
         }
         if (roleslist.equals("MODERATOR")) {
-            role = new Role(2L, "ROLE_USER");
-            user.setRoles(Collections.singleton(role));
+            Role role = new Role(2L, "ROLE_USER");
+            //user.setRoles(Collections.singleton(role));
+            roleSet.add(role);
+            user.setRoles(roleSet);
             userRepository.save(user);
         }
         if (roleslist.equals("USER")) {
-            role = new Role(3L, "ROLE_USER");
-            user.setRoles(Collections.singleton(role));
+            Role role = new Role(3L, "ROLE_USER");
+            //user.setRoles(Collections.singleton(role));
+            roleSet.add(role);
+            user.setRoles(roleSet);
             userRepository.save(user);
         }
     }

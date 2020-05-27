@@ -25,7 +25,19 @@
                    autofocus="true" value="${email}"/>
             <select name="roleslist">
                 <c:forEach items="${roleList}" var="listrole">
-                    <option name = "selectrole" value="${listrole}"><c:out value="${listrole}" /></option>
+                    <c:if test="${listrole.toString() eq roleList.get(0).toString()}" >
+                        <option name = "selectrole" value="${roleUser}"><c:out value="${roleUser}" /></option>
+                        <c:if test="${listrole.toString() ne roleUser.toString()}" >
+                            <option name = "selectrole" value="${listrole}"><c:out value="${listrole}" /></option>
+                        </c:if>
+                    </c:if>
+
+                    <c:if test="${listrole.toString() ne roleList.get(0).toString()}" >
+                        <c:if test="${listrole.toString() ne roleUser.toString()}" >
+                            <option name = "selectrole" value="${listrole}"><c:out value="${listrole}" /></option>
+                        </c:if>
+                    </c:if>
+
                 </c:forEach>
             </select>
 

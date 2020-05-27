@@ -1,5 +1,4 @@
 package ru.mcx73.gis.controller;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -17,12 +16,10 @@ import ru.mcx73.gis.service.FileService;
 import ru.mcx73.gis.service.MediaTypeUtils;
 import ru.mcx73.gis.service.RoleServiceImpl;
 import ru.mcx73.gis.service.UserService;
-
 import javax.servlet.ServletContext;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.Optional;
 import java.util.UUID;
 

@@ -2,24 +2,16 @@ package ru.mcx73.gis.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import ru.mcx73.gis.entity.Docs;
 import ru.mcx73.gis.entity.Role;
 import ru.mcx73.gis.entity.User;
 import ru.mcx73.gis.repository.DocsRepository;
-import ru.mcx73.gis.repository.RoleRepository;
 import ru.mcx73.gis.service.RoleServiceImpl;
 import ru.mcx73.gis.service.UserService;
-
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Controller
 public class AdminController {
